@@ -9,7 +9,7 @@ Sachin Deodhar (deodharsachin@gmail.com)
 #include <WiFiUdp.h>
 
 #define NTP_PACKET_HEADER_MAX_SIZE (48)
-#define NTP_SERVER_URL ("0.in.pool.ntp.org")
+#define NTP_SERVER_URL ("0.asia.pool.ntp.org")
 #define NTP_UTP_PORT (2390)
 #define INDIA_TIME_ZONE (19800)
 
