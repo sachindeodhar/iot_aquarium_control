@@ -81,6 +81,8 @@ void setDevicePowerState(fish_tank_dev_t dev, bool status) {
             digitalWrite(FISHTANK_DEV_LIGHT, HIGH);
             fish_tank_dev_status[FISHTANK_DEV_LIGHT_STATUS] = false;
         }
+        sinricClient.setPowerStateOnServer(FISHTANK_LIGHT_DEV_ID,
+                    fish_tank_dev_status[FISHTANK_DEV_LIGHT_STATUS]);
     }
     else if (dev == FISHTANK_DEV_FILTER)
     {
@@ -93,6 +95,8 @@ void setDevicePowerState(fish_tank_dev_t dev, bool status) {
             digitalWrite(FISHTANK_DEV_FILTER, LOW);
             fish_tank_dev_status[FISHTANK_DEV_FILTER_STATUS] = false;
         }
+        sinricClient.setPowerStateOnServer(FISHTANK_FILTER_DEV_ID,
+                    fish_tank_dev_status[FISHTANK_DEV_FILTER_STATUS]);
     }
 }
 
