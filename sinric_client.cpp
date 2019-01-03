@@ -26,12 +26,11 @@ static void WebSocketClientEventCb(WStype_t type, uint8_t * payload, size_t leng
 
             // Example payloads
 
-            // For Switch or Light device types
             // {"deviceId": xxxx, "action": "setPowerState", value: "ON"}
             // https://developer.amazon.com/docs/device-apis/alexa-powercontroller.html
 
-            // For Light device type
-            // Look at the light example in github
+            // {"deviceId":"5b23a02fc9860121c6c4689f","action":"action.devices.commands.OnOff","value":{"on":true}}
+            // For google home
 
             DynamicJsonBuffer jsonBuffer;
             JsonObject& json = jsonBuffer.parseObject((char*)payload);
@@ -50,6 +49,14 @@ static void WebSocketClientEventCb(WStype_t type, uint8_t * payload, size_t leng
                 String action = json ["action"];
                 String value = json ["value"];
             }
+	    else if (action == "action.devices.commands.OnOff") {
+		bool value = json ["value"]["on"];
+		if (value == true) {
+                    if (sinricClient) sinricClient->pSetPowerStateCb(deviceId, true);
+		} else {
+                    if (sinricClient) sinricClient->pSetPowerStateCb(deviceId, false);
+		}
+	    }
             else if (action == "test") {
                 Serial.printf("[Sinric-WS] received test command from sinric.com");
             }
